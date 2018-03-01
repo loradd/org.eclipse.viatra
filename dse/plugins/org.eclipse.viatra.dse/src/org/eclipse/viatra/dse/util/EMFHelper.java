@@ -278,16 +278,13 @@ public final class EMFHelper {
         } else if (notifier instanceof Resource) {
             Resource resource = (Resource) notifier;
             ResourceSet rSetTemp = resourceSetToCloneTo;
-            if (resourceSetToCloneTo == null) {
-                rSetTemp = new ResourceSetImpl();
-            }
-            Resource clonedResource = rSetTemp.createResource(URI.createFileURI("dummy.dummyext"));
-            
+            if (resourceSetToCloneTo == null) rSetTemp = new ResourceSetImpl();
+            registerExtensionForXmiSerializer("*");
+            Resource clonedResource = rSetTemp.createResource(resource.getURI());
             for (EObject eObject : resource.getContents()) {
                 EObject clonedEObject = copier.copy(eObject);
                 clonedResource.getContents().add(clonedEObject);
             }
-            
             return clonedResource;
         } else if (notifier instanceof ResourceSet) {
             ResourceSet resourceSet = (ResourceSet) notifier;

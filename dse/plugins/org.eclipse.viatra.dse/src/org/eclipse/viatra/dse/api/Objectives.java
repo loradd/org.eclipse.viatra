@@ -49,7 +49,7 @@ public class Objectives {
      * @return The objective.
      * @see TrajectoryCostSoftObjective
      */
-    public static TrajectoryCostSoftObjective createTrajcetoryCostObjective(String name) {
+    public static TrajectoryCostSoftObjective createTrajectoryCostObjective(String name) {
         return new TrajectoryCostSoftObjective(name);
     }
 

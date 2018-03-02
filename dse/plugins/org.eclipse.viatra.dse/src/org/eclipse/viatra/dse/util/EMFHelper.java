@@ -271,10 +271,10 @@ public final class EMFHelper {
 
     private static Notifier clone(Notifier notifier, Copier copier, ResourceSet resourceSetToCloneTo) {
         Objects.requireNonNull(copier);
-        
         if (notifier instanceof EObject) {
-            EObject eObject = (EObject) notifier;
-            return copier.copy(eObject);
+        	   	EObject eObject = (EObject) notifier;
+        	   	EObject clonedEObject = copier.copy(eObject);
+        	   	return clonedEObject; 
         } else if (notifier instanceof Resource) {
             Resource resource = (Resource) notifier;
             ResourceSet rSetTemp = resourceSetToCloneTo;
@@ -289,11 +289,9 @@ public final class EMFHelper {
         } else if (notifier instanceof ResourceSet) {
             ResourceSet resourceSet = (ResourceSet) notifier;
             ResourceSetImpl clonedResourceSet = new ResourceSetImpl();
-            
             for (Resource resource : resourceSet.getResources()) {
                 clone(resource, copier, clonedResourceSet);
             }
-            
             return clonedResourceSet;
         } else {
             throw new EmfHelperException("Not supported argument type.");
